@@ -1,0 +1,22 @@
+﻿
+@using Perplex.ContentBlocks.Rendering;
+@using Umbraco.Cms.Web.Common.PublishedModels
+@model IContentBlockViewModel<Block5>
+
+    @{
+        var row = (Block5)Model.Content;
+    }
+
+    @foreach(var item in row.FeaturedItems)
+    {
+        var rowItem = (FiveLinkItem)item;
+            @if (!string.IsNullOrWhiteSpace(rowItem.Value<string>("Number")))
+            {
+                <h5 class="card-title">@Html.Raw(@rowItem.Number)</h5>
+            }
+            @if (!string.IsNullOrWhiteSpace(rowItem.Description?.ToString()))
+            {
+                <p class="card-text">@Html.Raw(@rowItem.Description)</p>
+            }
+    }
+

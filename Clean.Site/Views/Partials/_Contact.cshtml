@@ -1,0 +1,37 @@
+﻿@*@model ContactForm
+@{
+    ViewData["Title"] = "Create";
+}
+ 
+@using(Html.BeginForm("Create", "Contact", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id)
+    <form method="post">
+    <div class="mb-3">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Topic">Topic</label>
+            <input asp-for="Topic" class="form-control">
+            <span asp-validation-for="Topic" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Message">Message</label>
+            <input asp-for="Message" class="form-control">
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+   
+
+       <span class="input-group-btn">
+        <input type="submit" class="btn btn-primary btn-flat" value="Save" />
+    </span>
+     </form>
+}
+*@

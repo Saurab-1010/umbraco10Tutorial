@@ -1,0 +1,10 @@
+﻿@using Perplex.ContentBlocks.Rendering;
+@model IContentBlockViewModel<Block1>
+
+
+   <h1> BLock 1 </h1>
+    <div class="container">
+        <div class="masthead-subheading">@Model.Content.IntroText</div>
+        <div class="masthead-heading text-uppercase">@Model.Content.MainTitle</div>
+        <header class="masthead" style="background-image:url('@Model.Content.MediaLink.Url()')"></header>
+    </div>

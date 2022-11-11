@@ -1,0 +1,48 @@
+if (document.getElementById('btnInviteUser') != null) {
+        document.getElementById('btnInviteUser').addEventListener('click',
+            function() {
+                var invitationEmail = $('#InvitationEmail').val();
+                if ($('#memberInviteForm').valid()) {
+                    document.getElementById('btnInviteUser').disabled = true;
+                    $.ajax({
+                        // async: true,
+                        data: {
+                            InvitationEmail: invitationEmail,
+                            FirstName: $("#FirstName").val(),
+                            LastName: $("#LastName").val(),
+                            TeamId: '@Model.Id',
+                            ReactivateUser: $('#UserExist').val(),
+                            UserMappedId: $("#UserMappedId").val()
+                            //CompanyId: $('#CompanyId').val()
+                        },
+                        type: "POST",
+                        url: '@Url.Action("AddInviteTeamMember", "Teams")',
+                        success: function (response) {
+                            if (response !== null) {
+
+                                var responseData = JSON.parse(response);
+                                if (responseData.title !== 'Warning') {
+
+                                    $('#memberModal').modal('hide');
+                                    var grid = document.getElementById("tdealOverViewGrid").ej2_instances[0];
+                                    if (responseData.Data != null) {
+
+                                        grid.dataSource = responseData.Data;
+                                    }
+                                }
+
+                                $('#btnInviteUser').attr('disabled', false);
+                                onSuccess(response);
+                                updateMemberCount("increment");
+                            }
+                        },
+                        error: function(error) {
+                            onFailed();
+
+                            // CloseLoader();
+                        }
+                    });
+                };
+
+            });
+}

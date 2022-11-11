@@ -1,0 +1,45 @@
+﻿
+@using Perplex.ContentBlocks.Rendering;
+@using Umbraco.Cms.Web.Common.PublishedModels
+@model IContentBlockViewModel<Block3>
+
+
+
+
+@{
+    var row = (Block3)Model.Content;
+    if (row.FeaturedItems == null || !row.FeaturedItems.Any()) return;
+    
+}
+
+<h1> Block 3 </h1>
+
+<div class="row gx-4 gx-lg-5 justify-content-center">
+        <header class="text-center">
+            <h2>@Html.Raw(@Model.Content.Title)</h2>
+            <h2>@Html.Raw(@Model.Content.Description)</h2> 
+        </header>
+
+
+
+    @foreach (var item in row.FeaturedItems)
+    {
+        var rowItem = (TextLinkItem)item;
+        <div class="card col-md-4 col-sm-12">
+            @if (rowItem.Image != null)
+            {
+                <img src="@rowItem.Image.GetCropUrl(490,383)" class="card-img-top" alt="@rowItem.Image.Name">
+            }
+        <div class="card-body">
+            @if (!string.IsNullOrWhiteSpace(rowItem.Value<string>("Title")))
+            {
+                <h5 class="card-title">@Html.Raw(@rowItem.Title)</h5>
+            }
+            @if (!string.IsNullOrWhiteSpace(rowItem.Description?.ToString()))
+            {
+                <p class="card-text">@Html.Raw(@rowItem.Description)</p>
+            }
+         </div>
+     </div>
+    } 
+</div>
